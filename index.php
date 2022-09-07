@@ -55,7 +55,7 @@ $data = GetStr($request, 'id="result">','</div>');
 // echo "<br>Data: $data<br>";
 
 if ($data == "No bins found!") {
-        echo "no_data_found";
+        exit('no_data_found');
 }
 
 elseif (strpos($data, "found 1 bins") && strpos($data, "$bin")) {
@@ -66,7 +66,7 @@ elseif (strpos($data, "found 1 bins") && strpos($data, "$bin")) {
         $bank = GetStr($request, "$bin</td><td>$country</td><td>$vendor</td><td>$type</td><td>$level</td><td>","</td>");
 }
 else{
-        echo "Server Side Processing Error";
+        exit('Server Side Processing Error');
 }
 
 $return = array(
@@ -79,7 +79,7 @@ $return = array(
 );
 $return = json_encode($return);
 
-echo "$return";
+exit($return);
 // echo "<br>BIN: $bin<br>Country: $country<br>Vendor: $vendor<br>Type: $type<br>Level: $level<br>Bank: $bank<br>";
 
 curl_close($ch);
